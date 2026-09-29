@@ -101,12 +101,19 @@ nav a {
     font-weight: bold;
 }
 
-nav a:hover,
-nav a:focus {
+/* Estado hover */
+nav a:hover {
     background-color: var(--cor-primaria-clara);
-    outline: none;
 }
 
+/* Estado focus - acessibilidade pelo teclado */
+nav a:focus {
+    background-color: var(--cor-primaria-clara);
+    outline: 3px solid #F9A825;
+    outline-offset: 3px;
+}
+
+/* Estado active */
 nav a:active {
     background-color: #1B5E20;
 }
@@ -189,6 +196,7 @@ select {
     background-color: #FFFFFF;
 }
 
+/* Foco dos campos do formulário */
 input:focus,
 select:focus {
     outline: 3px solid rgba(66, 165, 245, 0.35);
@@ -207,12 +215,15 @@ form button {
     margin-top: var(--espaco-md);
 }
 
+/* Hover do botão */
 form button:hover {
     background-color: #1B5E20;
 }
 
+/* Focus do botão */
 form button:focus {
-    outline: 3px solid rgba(66, 165, 245, 0.5);
+    outline: 3px solid #F9A825;
+    outline-offset: 3px;
 }
 
 
@@ -316,6 +327,11 @@ form button:focus {
     cursor: pointer;
 }
 
+.modal-fechar:focus {
+    outline: 3px solid #F9A825;
+    outline-offset: 3px;
+}
+
 .botao-principal {
     background-color: #2E7D32;
     color: #FFFFFF;
@@ -328,6 +344,11 @@ form button:focus {
 
 .botao-principal:hover {
     background-color: #1B5E20;
+}
+
+.botao-principal:focus {
+    outline: 3px solid #F9A825;
+    outline-offset: 3px;
 }
 
 
