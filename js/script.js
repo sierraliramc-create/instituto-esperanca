@@ -13,7 +13,7 @@ const paginas = {
             </p>
 
             <img
-                src="../imagens/ong.jpg"
+                src="imagens/ong.jpg"
                 alt="Voluntários do Instituto Esperança realizando uma ação social"
             >
 
@@ -46,9 +46,11 @@ const paginas = {
 
     projetos: `
         <section>
+
             <h1>Nossos Projetos</h1>
 
             <div class="projeto">
+
                 <h2>Projeto Educação</h2>
 
                 <p>
@@ -59,9 +61,11 @@ const paginas = {
                 <span class="badge badge-ativo">
                     Ativo
                 </span>
+
             </div>
 
             <div class="projeto">
+
                 <h2>Projeto Alimentação</h2>
 
                 <p>
@@ -72,12 +76,15 @@ const paginas = {
                 <span class="badge badge-andamento">
                     Em andamento
                 </span>
+
             </div>
+
         </section>
     `,
 
     cadastro: `
         <section>
+
             <h1>Participe</h1>
 
             <p>
@@ -85,17 +92,113 @@ const paginas = {
                 do Instituto Esperança.
             </p>
 
-            <form>
-                <label for="nome">Nome completo:</label>
-                <input type="text" id="nome" required>
+            <form id="form-cadastro">
 
-                <label for="email">E-mail:</label>
-                <input type="email" id="email" required>
+                <fieldset>
+
+                    <legend>Dados pessoais</legend>
+
+                    <label for="nome">Nome completo:</label>
+                    <input
+                        type="text"
+                        id="nome"
+                        name="nome"
+                        required
+                    >
+
+                    <label for="email">E-mail:</label>
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        required
+                    >
+
+                    <label for="nascimento">Data de nascimento:</label>
+                    <input
+                        type="date"
+                        id="nascimento"
+                        name="nascimento"
+                        required
+                    >
+
+                    <label for="cpf">CPF:</label>
+                    <input
+                        type="text"
+                        id="cpf"
+                        name="cpf"
+                        placeholder="000.000.000-00"
+                        required
+                    >
+
+                    <label for="telefone">Telefone:</label>
+                    <input
+                        type="tel"
+                        id="telefone"
+                        name="telefone"
+                        placeholder="(00) 00000-0000"
+                        required
+                    >
+
+                </fieldset>
+
+                <fieldset>
+
+                    <legend>Endereço</legend>
+
+                    <label for="endereco">Endereço:</label>
+                    <input
+                        type="text"
+                        id="endereco"
+                        name="endereco"
+                        required
+                    >
+
+                    <label for="cep">CEP:</label>
+                    <input
+                        type="text"
+                        id="cep"
+                        name="cep"
+                        placeholder="00000-000"
+                        required
+                    >
+
+                    <label for="cidade">Cidade:</label>
+                    <input
+                        type="text"
+                        id="cidade"
+                        name="cidade"
+                        required
+                    >
+
+                    <label for="estado">Estado:</label>
+                    <select id="estado" name="estado" required>
+
+                        <option value="">
+                            Selecione
+                        </option>
+
+                        <option value="SP">São Paulo</option>
+                        <option value="PR">Paraná</option>
+                        <option value="SC">Santa Catarina</option>
+                        <option value="RS">Rio Grande do Sul</option>
+                        <option value="RJ">Rio de Janeiro</option>
+                        <option value="MG">Minas Gerais</option>
+                        <option value="BA">Bahia</option>
+                        <option value="PE">Pernambuco</option>
+
+                    </select>
+
+                </fieldset>
 
                 <button type="submit">
                     Enviar cadastro
                 </button>
+
+                <p id="mensagem-cadastro"></p>
+
             </form>
+
         </section>
     `
 };
@@ -111,6 +214,53 @@ function renderizarPagina() {
     }
 }
 
-window.addEventListener("hashchange", renderizarPagina);
+function configurarFormulario() {
 
-renderizarPagina();
+    const formulario = document.getElementById("form-cadastro");
+
+    if (!formulario) {
+        return;
+    }
+
+    formulario.addEventListener("submit", function(evento) {
+
+        evento.preventDefault();
+
+        const dados = new FormData(formulario);
+
+        const cadastro = {
+            nome: dados.get("nome"),
+            email: dados.get("email"),
+            nascimento: dados.get("nascimento"),
+            cpf: dados.get("cpf"),
+            telefone: dados.get("telefone"),
+            endereco: dados.get("endereco"),
+            cep: dados.get("cep"),
+            cidade: dados.get("cidade"),
+            estado: dados.get("estado")
+        };
+
+        localStorage.setItem(
+            "cadastroInstitutoEsperanca",
+            JSON.stringify(cadastro)
+        );
+
+        const mensagem = document.getElementById("mensagem-cadastro");
+
+        mensagem.textContent =
+            "Cadastro realizado com sucesso!";
+
+        mensagem.className = "alert alert-sucesso";
+
+        formulario.reset();
+    });
+}
+
+function atualizarPagina() {
+    renderizarPagina();
+    configurarFormulario();
+}
+
+window.addEventListener("hashchange", atualizarPagina);
+
+atualizarPagina();
