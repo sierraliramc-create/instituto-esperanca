@@ -4,13 +4,14 @@ Projeto front-end desenvolvido para uma organização sem fins lucrativos, com o
 
 ## Funcionalidades
 
-- Navegação entre as páginas da aplicação
 - Navegação em formato SPA utilizando JavaScript
 - Apresentação dos projetos sociais
 - Formulário de cadastro
-- Elementos de feedback visual
+- Validação dos campos do formulário
+- Armazenamento dos dados utilizando localStorage
+- Feedback visual após o cadastro
 - Layout responsivo
-- Estrutura semântica e recursos de acessibilidade
+- Recursos básicos de acessibilidade
 
 ## Tecnologias
 
@@ -24,6 +25,7 @@ Projeto front-end desenvolvido para uma organização sem fins lucrativos, com o
 
 ```text
 instituto-esperanca/
+├── index.html
 ├── html/
 │   ├── index.html
 │   ├── cadastro.html
